@@ -1,15 +1,16 @@
 package com.oligarc.online_shop.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "basket")
 public class Basket {
@@ -28,6 +29,6 @@ public class Basket {
     private String status;
 
     @OneToMany(mappedBy = "basket")
-    private Set<com.oligarc.online_shop.model.BasketDetail> basketDetails = new LinkedHashSet<>();
+    private List<BasketDetail> basketDetails = new ArrayList<>();
 
 }

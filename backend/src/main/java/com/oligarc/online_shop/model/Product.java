@@ -1,14 +1,18 @@
 package com.oligarc.online_shop.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
@@ -25,6 +29,6 @@ public class Product {
     private String descripcion;
 
     @OneToMany(mappedBy = "product")
-    private Set<com.oligarc.online_shop.model.ProductVariant> productVariants = new LinkedHashSet<>();
+    private List<ProductVariant> productVariants = new ArrayList<>();
 
 }

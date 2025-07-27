@@ -1,19 +1,22 @@
 package com.oligarc.online_shop.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "\"user\"")
 public class User {
     @Id
+    @GeneratedValue //Since 6.5v Hibernate detects the UUID type and use UUIDGenerator automatically
     @Column(name = "id", nullable = false)
     private UUID id;
 
@@ -30,6 +33,6 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private Set<Basket> baskets = new LinkedHashSet<>();
+    private List<Basket> baskets = new ArrayList<>();
 
 }

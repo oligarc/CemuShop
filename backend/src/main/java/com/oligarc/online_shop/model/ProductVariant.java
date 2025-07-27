@@ -1,15 +1,19 @@
 package com.oligarc.online_shop.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "product_variant")
 public class ProductVariant {
@@ -47,6 +51,6 @@ public class ProductVariant {
     private Product product;
 
     @OneToMany(mappedBy = "productVariant")
-    private Set<BasketDetail> basketDetails = new LinkedHashSet<>();
+    private List<BasketDetail> basketDetails = new ArrayList<>();
 
 }
