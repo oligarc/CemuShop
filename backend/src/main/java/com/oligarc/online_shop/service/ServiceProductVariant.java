@@ -1,9 +1,9 @@
 package com.oligarc.online_shop.service;
 
-import com.oligarc.online_shop.model.ProductVariant;
+import com.oligarc.online_shop.DTO.ProductVariantDTO;
 
 import java.util.List;
 
 public interface ServiceProductVariant {
-    public List<ProductVariant> getAllProductVariants();
+    public List<ProductVariantDTO> getAllProductVariants();
 }

@@ -1,8 +1,11 @@
 package com.oligarc.online_shop.restController;
 
-import com.oligarc.online_shop.model.ProductVariant;
+import com.oligarc.online_shop.DTO.ProductVariantDTO;
+import com.oligarc.online_shop.handler.ResponseHandler;
 import com.oligarc.online_shop.service.ServiceProductVariant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +24,17 @@ public class ProductVariantController {
     }
 
     @GetMapping("/")
-    public List<ProductVariant> getAllProducts(){
-        return serviceProductVariant.getAllProductVariants();
+    public ResponseEntity<?> getAllProducts(){
+        try {
+            List<ProductVariantDTO> products = serviceProductVariant.getAllProductVariants();
+            if(products.isEmpty()){
+                return ResponseHandler.error("No se encontraron productos", HttpStatus.NOT_FOUND);
+            }
+
+            return ResponseHandler.success("Productos cargados con éxito", products);
+        } catch (Exception e) {
+            return ResponseHandler.error("Hubo un fallo al cargar los productos", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

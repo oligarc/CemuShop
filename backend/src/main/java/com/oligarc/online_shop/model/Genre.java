@@ -1,6 +1,8 @@
 package com.oligarc.online_shop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,8 @@ public class Genre {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(max = 50, message = "No puede superar los 50 caracteres")
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
