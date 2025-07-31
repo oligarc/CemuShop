@@ -73,6 +73,19 @@ public class GenreController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateGenre(@RequestBody Genre genre, @PathVariable int id){
+        try {
+
+            GenreDTO updatedGenre = serviceGenre.updateGenre(genre,id);
+            return ResponseHandler.success("Género actualizado con éxito", updatedGenre);
+
+        } catch (Exception e) {
+            logger.error("Error al actualizar el género con id" +id, e);
+            return ResponseHandler.error("Error al actualizar", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteGenre(@PathVariable int id){
         try {
