@@ -28,4 +28,8 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<ProductVariant> productVariants = new ArrayList<>();
 
+    public Category(int id,String name){
+        this.id=id;
+        this.name=name;
+    }
 }
