@@ -1,6 +1,7 @@
 package com.oligarc.online_shop.service;
 
 import com.oligarc.online_shop.DTO.GenreDTO;
+import com.oligarc.online_shop.exceptions.GenreNotFoundException;
 import com.oligarc.online_shop.mappers.GenreMapper;
 import com.oligarc.online_shop.model.Genre;
 import com.oligarc.online_shop.repository.GenreRepository;
@@ -29,7 +30,7 @@ public class ServiceGenreImpl implements ServiceGenre{
 
     @Override
     public GenreDTO getByGenreId(int id) {
-        Genre genre = genreRepository.findById(id).orElseThrow(() -> new RuntimeException("No existe un género con ese id"));
+        Genre genre = genreRepository.findById(id).orElseThrow(() -> new GenreNotFoundException("No existe un género con ese id"));
         return GenreMapper.convertToGenreDTO(genre);
     }
 
@@ -40,8 +41,16 @@ public class ServiceGenreImpl implements ServiceGenre{
     }
 
     @Override
+    public GenreDTO updateGenre(Genre genre, int id) {
+        Genre genre1 = genreRepository.findById(id).orElseThrow(() -> new GenreNotFoundException("No existe un género con ese id"));
+        genre1.setName(genre.getName());
+        genreRepository.save(genre1);
+        return GenreMapper.convertToGenreDTO(genre1);
+    }
+
+    @Override
     public void deleteGenre(int id) {
-        Genre genre = genreRepository.findById(id).orElseThrow(() -> new RuntimeException("No existe un género con ese id"));
-        genreRepository.deleteById(id);
+        Genre genre = genreRepository.findById(id).orElseThrow(() -> new GenreNotFoundException("No existe un género con ese id"));
+        genreRepository.delete(genre);
     }
 }
