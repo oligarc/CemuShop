@@ -65,7 +65,7 @@ public class GenreController {
             return ResponseHandler.error("Datos inválidos " +bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST);
         }
         try {
-            serviceGenre.saveGenre(genre);
+            serviceGenre.addGenre(genre);
             return ResponseHandler.success("Género guardado con éxito", genre);
         }catch (Exception e){
             logger.error("Error al guardar el género con id " +genre.getId(), e);
