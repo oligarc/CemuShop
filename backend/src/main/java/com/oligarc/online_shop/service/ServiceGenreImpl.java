@@ -35,7 +35,7 @@ public class ServiceGenreImpl implements ServiceGenre{
     }
 
     @Override
-    public GenreDTO saveGenre(Genre genre) {
+    public GenreDTO addGenre(Genre genre) {
         genreRepository.save(genre);
         return GenreMapper.convertToGenreDTO(genre);
     }
